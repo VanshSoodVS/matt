@@ -14,22 +14,23 @@ export default function Artist() {
   return (
     <div className="page">
       <div className="container">
-        <h1 className="page__title">Artist</h1>
+        <div className="artist">
+          <div className="artist__body">
+            <h1 className="artist__title">Artist</h1>
+            {bio.map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
+          </div>
 
-        <div className="prose">
-          {bio.map((p, i) => (
-            <p key={i}>{p}</p>
-          ))}
+          <figure className="artist__portrait">
+            <img src={PORTRAIT} alt="Matthew Willman" />
+          </figure>
         </div>
 
-        <figure className="artist__portrait">
-          <img src={PORTRAIT} alt="Matthew Willman" />
-        </figure>
+        <div className="artist__extra">
+          <VisualProcess variant="extended" />
 
-        <VisualProcess variant="extended" />
-
-        <div className="prose" style={{ marginTop: "36px" }}>
-          <p className="quote">
+          <p className="artist__quote">
             “Matthew is passionately connected to the complexity of his existence and those around
             him. I’m sure of Matthew’s gift, it’s not an issue… he connects with his passion… the
             rest just follows.”

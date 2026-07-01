@@ -11,6 +11,7 @@ export default function AnalogueCollection({ slug: slugProp }) {
       essay={collections[slug]}
       backTo="/analogue"
       backLabel="← Back to Collections"
+      framed={slug === "african-child"}
     />
   );
 }

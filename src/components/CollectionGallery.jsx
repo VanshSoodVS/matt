@@ -6,7 +6,12 @@ import Lightbox from "./Lightbox.jsx";
 // block at the left (title + description) followed by the images in one tall
 // row. Vertical wheel is translated into smooth, eased horizontal scrolling;
 // the strip can also be dragged. Shared by the Digital and Analogue sections.
-export default function CollectionGallery({ essay, backTo = "/", backLabel = "← Back" }) {
+export default function CollectionGallery({
+  essay,
+  backTo = "/",
+  backLabel = "← Back",
+  framed = false,
+}) {
   const [active, setActive] = useState(null);
   const [scrolled, setScrolled] = useState(false);
   const stripRef = useRef(null);
@@ -106,21 +111,17 @@ export default function CollectionGallery({ essay, backTo = "/", backLabel = "�
           {essay.intro && <div className="d-essay__intro">{essay.intro}</div>}
         </div>
 
-        {essay.images.map((img, i) => {
-          const ar = img.w && img.h ? img.w / img.h : 1;
-          return (
-            <figure
-              key={img.src + i}
-              className="d-essay__item"
-              style={{ aspectRatio: String(ar) }}
-              onClick={() => {
-                if (!drag.current.moved) setActive(i);
-              }}
-            >
-              <img src={img.src} alt="" draggable="false" loading="lazy" />
-            </figure>
-          );
-        })}
+        {essay.images.map((img, i) => (
+          <figure
+            key={img.src + i}
+            className={`d-essay__item${framed ? " is-framed" : ""}`}
+            onClick={() => {
+              if (!drag.current.moved) setActive(i);
+            }}
+          >
+            <img src={img.src} alt="" draggable="false" loading="lazy" />
+          </figure>
+        ))}
       </div>
 
       {!scrolled && <p className="d-scroll-hint">Drag or scroll →</p>}

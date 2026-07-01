@@ -1,6 +1,5 @@
 import "../digital/digital.css"; // shared collection-content styles (.d-*, theme)
 import TopNav from "../components/TopNav.jsx";
-import Footer from "../components/Footer.jsx";
 import BackToTop from "../components/BackToTop.jsx";
 
 // The Analogue Collection (formerly analogue.matthewwillman.co.za) merged into
@@ -15,7 +14,6 @@ export default function AnalogueLayout({ children }) {
           {children}
         </main>
       </div>
-      <Footer />
       <BackToTop />
     </div>
   );

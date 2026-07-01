@@ -214,8 +214,8 @@
 /* title block sits at the left of the strip */
 .d-essay__title {
   flex-shrink: 0;
-  width: 460px;
-  padding-right: 48px;
+  width: 560px;
+  padding-right: 52px;
   position: relative;
   align-self: center;
 }
@@ -237,22 +237,28 @@
   padding-right: 6px;
 }
 
-/* gallery items: fixed height, width follows the image aspect ratio */
+/* gallery items: fixed height; width follows each image's true aspect ratio
+   (no cropping). */
 .d-essay__item {
   flex-shrink: 0;
   height: 66vh;
   min-height: 360px;
   cursor: zoom-in;
-  background: #f1f1f1;
-  overflow: hidden;
 }
 
 .d-essay__item img {
   height: 100%;
-  width: 100%;
-  object-fit: cover;
+  width: auto;
   display: block;
   user-select: none;
+}
+
+/* Framed variant: a white border for collections whose source images are raw
+   photos without a mat (e.g. African Child), matching the framed look of the
+   other collections. */
+.d-essay__item.is-framed img {
+  border: 14px solid #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
 }
 
 .d-scroll-hint {
@@ -301,6 +307,7 @@
   }
   .d-essay__item img {
     height: auto;
+    width: 100%;
   }
   .d-scroll-hint {
     display: none;

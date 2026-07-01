@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { portalLinks } from "../data/nav.js";
 import TopNav from "../components/TopNav.jsx";
-import Footer from "../components/Footer.jsx";
 
 const BOOK = "/wp-content/uploads/2026/06/Tuisland_book_for_website-1.jpg";
 const DIGITAL = "/wp-content/uploads/2025/04/A7.jpg";
@@ -65,8 +64,6 @@ export default function HomePortal() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }

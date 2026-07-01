@@ -40,7 +40,10 @@ export default function Exhibition() {
           <strong>former chairman of Walt Disney, John Pepper</strong>
         </p>
 
-        <h2 className="page__title" style={{ fontSize: "1.3rem" }}>
+        <h2
+          className="page__title"
+          style={{ fontSize: "1.3rem", textAlign: "left", maxWidth: "820px", margin: "0 0 0.8em" }}
+        >
           Selection of Museums, Galleries &amp; Exhibitions where Willman’s work has exhibited and
           housed.
         </h2>

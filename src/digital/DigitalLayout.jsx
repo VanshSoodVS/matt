@@ -1,6 +1,5 @@
 import "./digital.css";
 import TopNav from "../components/TopNav.jsx";
-import Footer from "../components/Footer.jsx";
 import BackToTop from "../components/BackToTop.jsx";
 
 // The Digital Collection is now merged into the main site: it shares the
@@ -15,7 +14,6 @@ export default function DigitalLayout({ children }) {
           {children}
         </main>
       </div>
-      <Footer />
       <BackToTop />
     </div>
   );
