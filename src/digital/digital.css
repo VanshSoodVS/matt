@@ -1,0 +1,444 @@
+/* ==========================================================================
+   Digital Collection (digital.matthewwillman.co.za) — section styles.
+   Faithful to the original "thecs" theme: Josefin Sans, light theme,
+   centred 880px content column, and horizontal-scroll photo-essay galleries.
+   Scoped under .digital so it never clashes with the portal styles.
+   ========================================================================== */
+
+/* The Digital / Analogue Collection content wrapper. The shared top nav and
+   footer live OUTSIDE this element, so only the content adopts the Josefin
+   Sans styling. Both collection sites share this theme. */
+.digital,
+.analogue {
+  --d-text: #161718;
+  --d-muted: #8a8a8a;
+  --d-line: #e6e6e6;
+  background: #ffffff;
+  color: var(--d-text);
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+}
+
+.digital a,
+.analogue a {
+  color: var(--d-text);
+}
+
+/* The original Analogue site's pages were a solid grey (#e8e8e8); the framed
+   prints are composed on that grey, so the content area uses it too (the
+   shared nav/footer stay white). */
+.analogue {
+  background: #e8e8e8;
+}
+
+.analogue .d-essay-card__img,
+.analogue .d-essay__item {
+  background: #e8e8e8;
+}
+
+.d-main {
+  width: 100%;
+}
+
+/* Centred content column for Home / About / Books / Contact (thecs:
+   .default-template-page { max-width: 880px; margin: 15vh auto }). */
+.d-wrap {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 9vh 20px 12vh;
+}
+
+.d-page-title {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 0 44px;
+}
+
+.d-intro {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #2a2a2a;
+}
+
+.d-subnav {
+  text-align: center;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  color: var(--d-muted);
+}
+
+.d-subnav a {
+  color: var(--d-text);
+}
+
+/* ==========================================================================
+   Home — Photo Essays grid (4 columns, square tiles, centred titles)
+   ========================================================================== */
+.d-essays-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px 24px;
+}
+
+.d-essay-card {
+  display: block;
+  text-align: center;
+  color: #000;
+}
+
+.d-essay-card:hover {
+  opacity: 1;
+}
+
+.d-essay-card__img {
+  position: relative;
+  overflow: hidden;
+  background: #f1f1f1;
+}
+
+.d-essay-card__img::before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+.d-essay-card__img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease, opacity 0.4s ease;
+}
+
+.d-essay-card:hover .d-essay-card__img img {
+  transform: scale(1.05);
+  opacity: 0.85;
+}
+
+.d-essay-card__title {
+  margin: 14px 0 0;
+  font-size: 0.92rem;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+/* Three-up variant (Analogue Collection). */
+.d-essays-grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Scroll reveal: a subtle slide + fade as each row enters view. Two rows share
+   a direction; pairs alternate left / right (a sleek take on the original
+   analogue site's fadeInLeft / fadeInRight row animation). */
+.d-essays-grid.is-animated .d-essay-card {
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.d-essays-grid.is-animated .d-essay-card.from-left {
+  transform: translateX(-80px);
+}
+
+.d-essays-grid.is-animated .d-essay-card.from-right {
+  transform: translateX(80px);
+}
+
+.d-essays-grid.is-animated .d-essay-card.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .d-essays-grid.is-animated .d-essay-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .d-essays-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .d-essays-grid.cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 460px) {
+  .d-essays-grid.cols-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .d-essays-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 14px;
+  }
+}
+
+/* ==========================================================================
+   Photo Essay — horizontal-scroll gallery strip (thecs sc-images look)
+   ========================================================================== */
+.d-essay {
+  display: flex;
+  align-items: center;
+  gap: 1.4vw;
+  height: calc(100vh - 66px);
+  min-height: 520px;
+  padding: 0 5vw 0 64px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  cursor: grab;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.d-essay.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+}
+
+.d-essay.is-dragging img {
+  pointer-events: none;
+}
+
+/* title block sits at the left of the strip */
+.d-essay__title {
+  flex-shrink: 0;
+  width: 460px;
+  padding-right: 48px;
+  position: relative;
+  align-self: center;
+}
+
+.d-essay__title h1 {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.d-essay__intro {
+  margin-top: 18px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #333;
+  max-height: 62vh;
+  overflow: auto;
+  padding-right: 6px;
+}
+
+/* gallery items: fixed height, width follows the image aspect ratio */
+.d-essay__item {
+  flex-shrink: 0;
+  height: 66vh;
+  min-height: 360px;
+  cursor: zoom-in;
+  background: #f1f1f1;
+  overflow: hidden;
+}
+
+.d-essay__item img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+}
+
+.d-scroll-hint {
+  text-align: center;
+  color: var(--d-muted);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 16px 0 8px;
+}
+
+.d-essay__back {
+  display: inline-block;
+  margin: 6px 0 0 64px;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #000;
+  padding-bottom: 2px;
+  color: #000;
+}
+
+/* On phones the strip becomes a vertical, stacked gallery and the intro shows
+   inline (matching the theme's mobile behaviour). */
+@media (max-width: 720px) {
+  .d-essay {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    cursor: default;
+    padding: 0 18px;
+    gap: 14px;
+  }
+  .d-essay__title {
+    width: auto;
+    padding: 0 0 6px;
+  }
+  .d-essay__intro {
+    max-height: none;
+  }
+  .d-essay__item {
+    height: auto;
+    min-height: 0;
+    width: 100%;
+  }
+  .d-essay__item img {
+    height: auto;
+  }
+  .d-scroll-hint {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   About
+   ========================================================================== */
+.d-about p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin: 0 0 1.4em;
+  color: #1d1d1d;
+}
+
+.d-about blockquote {
+  margin: 1.6em 0;
+  padding: 4px 0 4px 22px;
+  border-left: 2px solid #000;
+  font-style: italic;
+  color: #333;
+}
+
+.d-about blockquote cite {
+  display: block;
+  margin-top: 8px;
+  font-style: normal;
+  font-size: 0.85rem;
+  color: var(--d-muted);
+}
+
+/* ==========================================================================
+   Books
+   ========================================================================== */
+.d-books {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.d-book {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Featured "New Release": larger, centred hero treatment. */
+.d-book--featured {
+  display: block;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+  border-bottom: 1px solid var(--d-line);
+}
+
+.d-book--featured .d-book__tag {
+  margin-bottom: 20px;
+}
+
+.d-book--featured .d-book__cover {
+  max-width: 420px;
+  margin: 0 auto 32px;
+}
+
+.d-book--featured .d-book__body {
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.d-book--featured .d-book__body p {
+  text-align: center;
+}
+
+.d-book__cover img {
+  width: 100%;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.16);
+}
+
+.d-book__tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  background: #000;
+  padding: 4px 12px;
+  margin-bottom: 12px;
+}
+
+.d-book__title {
+  font-size: 1.55rem;
+  font-weight: 700;
+  margin: 0 0 0.5em;
+}
+
+.d-book__body p {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0 0 1.1em;
+  color: #232323;
+}
+
+.d-book__link {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #000;
+  padding-bottom: 2px;
+  color: #000;
+}
+
+@media (max-width: 620px) {
+  .d-book {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .d-book__cover {
+    max-width: 240px;
+  }
+}
+
+/* ==========================================================================
+   Contact
+   ========================================================================== */
+.d-contact__label {
+  letter-spacing: 0.5px;
+  color: var(--d-muted);
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.d-contact__email a {
+  font-size: 1.4rem;
+  color: #000;
+  border-bottom: 1px solid #000;
+  padding-bottom: 2px;
+}
