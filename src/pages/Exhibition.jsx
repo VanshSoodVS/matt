@@ -36,8 +36,9 @@ export default function Exhibition() {
       <div className="container">
         <p className="exhibition__quote">
           “Matthew has the ability to see and creatively narrate the essence of life where it is
-          found, his work is seminal in its vision and iconic by its very nature” —{" "}
-          <strong>former chairman of Walt Disney, John Pepper</strong>
+          found, his work is seminal in its vision and iconic by its very nature”
+          <br />
+          <strong>— former chairman of Walt Disney, John Pepper</strong>
         </p>
 
         <h2
