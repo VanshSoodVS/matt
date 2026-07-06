@@ -28,12 +28,12 @@ const venues = [
 
 export default function Exhibition() {
   return (
-    <div className="page">
-      <div className="container">
-        <figure className="exhibition__banner">
-          <img src={BANNER} alt="Matthew Willman exhibitions" />
-        </figure>
+    <div className="page exhibition-page">
+      <figure className="exhibition__banner">
+        <img src={BANNER} alt="Matthew Willman exhibitions" />
+      </figure>
 
+      <div className="container">
         <p className="exhibition__quote">
           “Matthew has the ability to see and creatively narrate the essence of life where it is
           found, his work is seminal in its vision and iconic by its very nature” —{" "}

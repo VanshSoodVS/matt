@@ -15,7 +15,7 @@
   --d-line: #e6e6e6;
   background: #ffffff;
   color: var(--d-text);
-  font-family: "Josefin Sans", sans-serif;
+  font-family: var(--font-body);
   font-weight: 400;
   letter-spacing: 0.2px;
 }
@@ -47,6 +47,12 @@
   max-width: 880px;
   margin: 0 auto;
   padding: 9vh 20px 12vh;
+}
+
+/* Left-pinned variant (not centered) — used on the Contact page. */
+.d-wrap--left {
+  margin: 0;
+  padding-left: clamp(18px, 3vw, 48px);
 }
 
 .d-page-title {

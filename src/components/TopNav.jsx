@@ -15,7 +15,7 @@ export default function TopNav() {
 
   return (
     <nav className="portal-nav site-nav">
-      <div className="container container--wide portal-nav__inner">
+      <div className="portal-nav__inner">
         <p className="portal-nav__brand">
           <Link to="/">MATTHEW WILLMAN</Link>
         </p>

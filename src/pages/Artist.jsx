@@ -12,7 +12,7 @@ const bio = [
 
 export default function Artist() {
   return (
-    <div className="page">
+    <div className="page artist-page">
       <div className="container">
         <div className="artist">
           <div className="artist__body">
