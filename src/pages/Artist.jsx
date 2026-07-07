@@ -14,9 +14,10 @@ export default function Artist() {
   return (
     <div className="page artist-page">
       <div className="container">
+        <h1 className="artist__title">Artist</h1>
+
         <div className="artist">
           <div className="artist__body">
-            <h1 className="artist__title">Artist</h1>
             {bio.map((p, i) => (
               <p key={i}>{p}</p>
             ))}

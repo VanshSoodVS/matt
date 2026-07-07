@@ -455,8 +455,6 @@ p {
   flex: 0 0 48%;
   max-width: 560px;
   margin: 0;
-  position: sticky;
-  top: 96px;
 }
 
 .artist__portrait img {
@@ -497,7 +495,7 @@ p {
 }
 
 .exhibition__banner {
-  margin: 0 0 40px;
+  margin: 0 0 4px;
 }
 
 /* Banner spans the full page width and scales proportionally (no distortion). */
@@ -520,9 +518,12 @@ p {
   text-align: left;
   font-style: italic;
   font-size: 1.05rem;
+  line-height: 1.3;
 }
 
 .exhibition__quote strong {
+  display: block;
+  margin-top: 0;
   font-style: normal;
 }
 

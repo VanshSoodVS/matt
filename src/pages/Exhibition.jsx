@@ -1,4 +1,4 @@
-const BANNER = "/wp-content/uploads/2026/04/Exhibitions-2.jpg";
+const BANNER = "/10a.jpg";
 
 const venues = [
   "The National Underground Railroad Freedom Center – Cincinnati, Ohio, USA",
@@ -37,7 +37,6 @@ export default function Exhibition() {
         <p className="exhibition__quote">
           “Matthew has the ability to see and creatively narrate the essence of life where it is
           found, his work is seminal in its vision and iconic by its very nature”
-          <br />
           <strong>— former chairman of Walt Disney, John Pepper</strong>
         </p>
 
