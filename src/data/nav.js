@@ -10,6 +10,7 @@ export const portalNav = [
   { label: "Legacy", to: "/analogue", external: false },
   { label: "Contemporary", to: "/digital", external: false },
   { label: "Books", to: "/digital/books", external: false },
+  { label: "Homme", to: "/homme", external: false },
   { label: "Exhibition", to: "/exhibition", external: false },
   { label: "Contact", to: "/digital/contact", external: false },
 ];

@@ -5,6 +5,7 @@ import ScrollToTop from "./components/ScrollToTop.jsx";
 import HomePortal from "./pages/HomePortal.jsx";
 import Artist from "./pages/Artist.jsx";
 import Exhibition from "./pages/Exhibition.jsx";
+import Homme from "./pages/Homme.jsx";
 import Hub from "./pages/Hub.jsx";
 import Collection from "./pages/Collection.jsx";
 import Contact from "./pages/Contact.jsx";
@@ -52,6 +53,7 @@ export default function App() {
 
         <Route path="/artist" element={withLayout(<Artist />)} />
         <Route path="/exhibition" element={withLayout(<Exhibition />)} />
+        <Route path="/homme" element={withLayout(<Homme />)} />
         <Route path="/legacy" element={withLayout(<Hub name="legacy" />)} />
         <Route path="/contemporary" element={withLayout(<Hub name="contemporary" />)} />
         <Route path="/contact" element={withLayout(<Contact />)} />

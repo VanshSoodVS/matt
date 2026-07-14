@@ -1,69 +1,72 @@
 import { Link } from "react-router-dom";
-import { portalLinks } from "../data/nav.js";
 import TopNav from "../components/TopNav.jsx";
 
-const BOOK = "/wp-content/uploads/2026/06/Tuisland_book_for_website-1.jpg";
-const DIGITAL = "/wp-content/uploads/2025/04/A7.jpg";
-const ANALOGUE = "/wp-content/uploads/2025/04/Willman-Opener-e1747206044516.jpg";
+const BASE = "/wp-content/uploads/landing-images";
+const HERO = `${BASE}/homme-hero.jpg`;
+const BOX1 = `${BASE}/homme-box-1.jpg`;
+const BOX2 = `${BASE}/homme-box-2.jpg`;
 
-// The Home Portal landing page (page 2525). The original hides the site
-// header here, so this page renders its own minimal top nav instead.
+const EMAIL = "matthew@matthewwillman.co.za";
+const mailto = (edition) =>
+  `mailto:${EMAIL}?subject=${encodeURIComponent(`HOMME pre-order — ${edition}`)}`;
+
+// Home / landing page: the HOMME book launch.
 export default function HomePortal() {
   return (
-    <div className="portal">
+    <div className="landing">
       <TopNav />
 
-      {/* New book release feature */}
-      <section className="portal-feature">
-        <div className="container">
-          <div className="portal-feature__row">
-            <p className="portal-feature__label">
-              New
-              <br />
-              Book
-              <br />
-              Release
-            </p>
-            <Link className="portal-feature__image" to={portalLinks.book}>
-              <img src={BOOK} alt="Tuisland — new book release" />
-            </Link>
-            <p className="portal-feature__label">
-              <Link to={portalLinks.book}>
-                Order &amp;
-                <br />
-                View
-                <br />
-                Here
-              </Link>
-            </p>
-          </div>
-        </div>
+      <section className="landing-hero">
+        <img src={HERO} alt="HOMME by Matthew Willman — launching October 2026" />
       </section>
 
-      {/* Two collection tiles */}
-      <section className="portal-tiles">
-        <div className="container">
-          <div className="portal-tiles__row">
-            <div className="portal-tile">
-              <Link className="portal-tile__image" to={portalLinks.digital}>
-                <img src={DIGITAL} alt="MW Collection Digital" />
-              </Link>
-              <Link className="portal-tile__button" to={portalLinks.digital}>
-                MW Collection Digital
-              </Link>
-            </div>
+      <div className="landing-body">
+        <p className="landing-register">
+          Register your email address to secure advanced pre-order access before public release
+        </p>
 
-            <div className="portal-tile">
-              <Link className="portal-tile__image" to={portalLinks.analogue}>
-                <img src={ANALOGUE} alt="MW Collection Analogue" />
-              </Link>
-              <Link className="portal-tile__button" to={portalLinks.analogue}>
-                MW Collection Analogue
-              </Link>
+        <div className="landing-editions">
+          <div className="edition">
+            <div className="edition__img">
+              <img src={BOX1} alt="HOMME — Collector’s Slipcase Edition" />
             </div>
+            <p className="edition__title">
+              <strong>COLLECTOR’S SLIPCASE EDITION</strong> launch special
+            </p>
+            <p className="edition__sub">Including original giclee signed print and certificate</p>
+            <p className="edition__price">South Africa&nbsp;&nbsp;R3 950</p>
+            <p className="edition__price">International US$ 380</p>
+            <p className="edition__price">FedEx Priority Included</p>
+            <a className="edition__submit" href={mailto("Collector’s Slipcase Edition")}>
+              SUBMIT YOUR
+              <br />
+              EMAIL HERE
+            </a>
+          </div>
+
+          <div className="edition">
+            <div className="edition__img">
+              <img src={BOX2} alt="HOMME — Signed First Edition" />
+            </div>
+            <p className="edition__title">
+              <strong>SIGNED FIRST EDITION</strong>
+            </p>
+            <p className="edition__sub">&nbsp;</p>
+            <p className="edition__price">South Africa&nbsp;&nbsp;R2 950</p>
+            <p className="edition__price">International US$ 280</p>
+            <p className="edition__price">FedEx Priority Included</p>
+            <a className="edition__submit" href={mailto("Signed First Edition")}>
+              SUBMIT YOUR
+              <br />
+              EMAIL HERE
+            </a>
           </div>
         </div>
-      </section>
+
+        <Link className="landing-viewbook" to="/homme">
+          Click here to view book
+        </Link>
+      </div>
     </div>
   );
 }
