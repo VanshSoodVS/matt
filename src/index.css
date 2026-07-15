@@ -1040,59 +1040,88 @@ p {
   margin: 0 auto;
 }
 
+.homme__hero {
+  max-width: 470px;
+}
+
 .homme__feature {
+  max-width: 720px;
   margin-top: 40px;
 }
 
-.homme__quote {
+.homme__text {
   max-width: 720px;
-  margin: 30px auto;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: #1c1c1c;
+  margin: 0 auto;
 }
 
-.homme__quote cite {
+.homme__quote {
+  margin: 44px auto 34px;
+  padding: 0;
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.35;
+  color: #fff;
+  text-align: left;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.homme__quote span {
   display: block;
-  margin-top: 10px;
-  font-style: normal;
-  font-weight: 700;
 }
 
-.homme__intro {
-  max-width: 760px;
+.homme__cite {
+  width: fit-content;
+  margin: 0 8em 40px auto;
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  text-align: left;
+  color: #000;
+}
+
+.homme__body {
+  max-width: 720px;
   margin: 0 auto;
   font-size: 0.92rem;
   line-height: 1.75;
-  color: #262626;
-  text-align: left;
+  color: #fff;
+  text-align: justify;
 }
 
-.homme__intro p {
-  margin: 0 0 1.1em;
+.homme__body p {
+  margin: 0 0 1.2em;
 }
 
 .homme__specs {
-  max-width: 760px;
-  margin: 26px auto 0;
+  margin: 26px 0 0;
   text-align: left;
-  font-size: 0.85rem;
-  line-height: 1.6;
-  color: #2a2a2a;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #fff;
 }
 
 .homme__specs > div {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .homme__specs dt {
-  flex: 0 0 90px;
-  font-weight: 700;
+  flex: 0 0 auto;
+  min-width: 96px;
+  font-weight: 400;
 }
 
 .homme__specs dd {
   margin: 0;
+  flex: 1;
+}
+
+.homme__body .homme__launch {
+  margin: 2.4em 0 0;
+  text-align: left;
+  font-size: 0.92rem;
+  color: #fff;
 }
 
 .homme__offerings {
@@ -1116,12 +1145,17 @@ p {
 }
 
 .homme-edition__img {
-  max-width: 260px;
+  height: 300px;
   margin: 0 auto 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .homme-edition__img img {
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
   height: auto;
   display: block;
 }
@@ -1131,20 +1165,20 @@ p {
   font-weight: 700;
   letter-spacing: 0.5px;
   margin: 0 0 8px;
-  color: #111;
+  color: #fff;
 }
 
 .homme-edition__note {
   font-size: 0.85rem;
   line-height: 1.5;
-  color: #2a2a2a;
+  color: #fff;
   margin: 0 0 16px;
 }
 
 .homme-edition__price {
   font-size: 0.95rem;
   line-height: 1.9;
-  color: #1e1e1e;
+  color: #fff;
   margin: 0;
 }
 
@@ -1158,14 +1192,14 @@ p {
 .homme__gallery img {
   display: block;
   width: 100%;
-  max-width: 880px;
+  max-width: 620px;
   height: auto;
   margin: 0 auto;
 }
 
 .homme__copyright {
   margin: 64px 0 0;
-  color: #f2f2f2;
+  color: #fff;
   font-size: 0.9rem;
   letter-spacing: 0.5px;
 }

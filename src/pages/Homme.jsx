@@ -2,11 +2,28 @@ const IMG = "/wp-content/uploads/homme-images";
 const BOX = "/wp-content/uploads/landing-images";
 
 // The five fine-art plates from the HOMME collection (assets already censored).
-const PLATES = ["5.jpg", "31.jpg", "46.jpg", "44.jpg", "95.jpg"];
+const PLATES = ["44.jpg", "31.jpg", "46.jpg", "95.jpg", "5.jpg"];
 
-// NOTE: the body copy, production details and quote attribution below are
-// placeholders — the exact wording wasn't legible in the reference. Replace
-// with the final copy when available.
+// Quote laid out as a staggered cascade (per-line left indent, in em).
+const QUOTE = [
+  { t: "“It is immediately apparent", pl: 5.5 },
+  { t: "that this project represents", pl: 13.5 },
+  { t: "an extraordinary commitment of", pl: 4 },
+  { t: "time, vision, and craftsmanship.", pl: 10 },
+  { t: "The photographs are beautifully executed,", pl: 0, gap: true },
+  { t: "and the quality of both the work", pl: 10.5 },
+  { t: "and the production is of the highest order.”", pl: 1 },
+];
+
+const SPECS = [
+  ["Format", "12 x 10 inch / 31 x 24.5 cm"],
+  ["Pages", "208 pages"],
+  ["Paper", "200gsm garda premium matte museum-quality Italian fine-art paper"],
+  ["Cover", "Wibalin Buckram Graphite hard cover"],
+  ["Dust Jacket", "200gsm garda premium paper with satin lamination finish."],
+  ["ISBN", "978-1-0483-0117-5 (hard cover)"],
+];
+
 export default function Homme() {
   return (
     <div className="homme">
@@ -17,34 +34,64 @@ export default function Homme() {
           alt="HOMME — Form. Strength. Simplicity. by Matthew Willman"
         />
 
-        <blockquote className="homme__quote">
-          “It is immensely apparent that this project represents an extraordinary commitment of
-          time, vision, and craftsmanship. The photographs are beautifully executed, and the scale
-          of both the work and the production is of the highest order.”
-          <cite>— Robert Fear</cite>
-        </blockquote>
+        <div className="homme__text">
+          <blockquote className="homme__quote">
+            {QUOTE.map((l, i) => (
+              <span
+                key={i}
+                style={{ paddingLeft: `${l.pl}em`, marginTop: l.gap ? "1.1em" : undefined }}
+              >
+                {l.t}
+              </span>
+            ))}
+          </blockquote>
 
-        <div className="homme__intro">
-          <p>
-            HOMME is a study of the male form — an exploration of strength, restraint and
-            vulnerability rendered through Matthew Willman’s signature black-and-white language.
-            Photographed over several years, the collection distils the body to its essential
-            lines: form, tension, and stillness.
+          <p className="homme__cite">
+            Robert Klein
+            <br />
+            Robert Klein Gallery
+            <br />
+            Boston, USA
           </p>
-          <p>
-            Printed and bound to the highest archival standards, HOMME is both a photographic
-            monograph and a collector’s object — a limited, numbered edition intended to endure.
-          </p>
+
+          <div className="homme__body">
+            <p>
+              ‘HOMME’ is a celebration of the male form as fine art. An exploration of strength,
+              vulnerability, movement, and quiet humanity through the language of photography. Over
+              ten years, photographer Matthew Willman created a body of work that moves beyond the
+              traditional nude to reveal something more enduring: the emotional presence of the
+              individual.
+            </p>
+            <p>
+              Working with dancers, athletes, and models, he uses light, composition, and the
+              natural landscape to create images that are both sculptural and deeply intimate.
+              Drawing inspiration from the rich history of classical art while embracing a
+              contemporary vision of masculinity, HOMME invites the viewer to see the body not as an
+              object, but as a living expression of identity, grace, and resilience. Each photograph
+              is an invitation to pause, to look more closely, and to appreciate the extraordinary
+              beauty found in authenticity.
+            </p>
+            <p>
+              ‘HOMME’ is a masterpiece of photography. Willman’s rich history as a former ballet
+              dancer and today a significant voice in balletic photography around the world. ‘HOMME’
+              is a seminal collection printed by the finest Italian printers in Verona, Italy. A true
+              find for any fine-art photography book collector.
+            </p>
+            <p>A limited-edition book collection.</p>
+            <p>Printed in Verona, Italy</p>
+
+            <dl className="homme__specs">
+              {SPECS.map(([label, value]) => (
+                <div key={label}>
+                  <dt>{label}</dt>
+                  <dd>{value}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <p className="homme__launch">Launch Date: October 2026</p>
+          </div>
         </div>
-
-        <dl className="homme__specs">
-          <div><dt>Format</dt><dd>Hardcover, cloth-bound with foil detailing</dd></div>
-          <div><dt>Pages</dt><dd>224</dd></div>
-          <div><dt>Plates</dt><dd>110 duotone photographs</dd></div>
-          <div><dt>Paper</dt><dd>200gsm matt art</dd></div>
-          <div><dt>Size</dt><dd>300 × 360 mm</dd></div>
-          <div><dt>Print</dt><dd>Offset lithography, produced under the artist’s supervision</dd></div>
-        </dl>
 
         <img
           className="homme__feature"
