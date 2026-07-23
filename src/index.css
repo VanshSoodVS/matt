@@ -210,7 +210,7 @@ p {
 
 .edition__img {
   height: 380px;
-  margin: 0 auto 18px;
+  margin: 0 auto 26px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -228,7 +228,7 @@ p {
 .edition__title {
   font-size: 1rem;
   font-weight: 400;
-  margin: 0 0 4px;
+  margin: 0 0 6px;
 }
 
 .edition__title strong {
@@ -238,20 +238,20 @@ p {
 .edition__sub {
   font-size: 0.9rem;
   color: #333;
-  margin: 0 0 10px;
+  margin: 0 0 22px;
   min-height: 1.1em;
 }
 
 .edition__price {
   font-size: 1.05rem;
-  line-height: 1.5;
+  line-height: 2;
   color: #222;
   margin: 0;
 }
 
 .edition__submit {
   display: inline-block;
-  margin-top: 12px;
+  margin-top: 26px;
   color: #e6007e;
   font-size: 1.5rem;
   line-height: 1.25;
@@ -275,9 +275,19 @@ p {
 }
 
 @media (max-width: 640px) {
+  /* Stack the two editions vertically. Cancel the desktop subgrid so each
+     edition flows on its own instead of both sharing rows 1–5. */
   .landing-editions {
-    grid-template-columns: 1fr;
-    gap: 56px;
+    display: block;
+  }
+  .edition {
+    display: block;
+    grid-row: auto;
+    grid-template-rows: none;
+    margin-bottom: 56px;
+  }
+  .edition:last-child {
+    margin-bottom: 0;
   }
 }
 
@@ -381,6 +391,77 @@ p {
   }
   .portal-nav__links a {
     margin-left: 12px;
+  }
+}
+
+/* ---- Hamburger toggle (mobile navigation) ---- */
+.portal-nav__toggle {
+  display: none; /* hidden on desktop; the inline links show instead */
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  margin-left: auto;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.portal-nav__toggle-bar {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background: var(--color-text);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+@media (max-width: 700px) {
+  .portal-nav__toggle {
+    display: flex; /* show the hamburger */
+  }
+
+  /* Links hidden by default; drop into a full-width vertical panel when open. */
+  .portal-nav__links {
+    display: none;
+    flex-basis: 100%;
+    margin-left: 0;
+    text-align: left;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    padding: 6px 0 10px;
+  }
+
+  .portal-nav__links.is-open {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .portal-nav__links a {
+    margin-left: 0;
+    padding: 15px 4px; /* large, finger-friendly tap targets */
+    border-top: 1px solid #ececec;
+  }
+
+  /* The sliding underline indicator doesn't suit a vertical list. */
+  .portal-nav__links a::after {
+    display: none;
+  }
+
+  .portal-nav__links a.is-active {
+    font-weight: 700;
+  }
+
+  /* Morph the three bars into an X while the menu is open. */
+  .portal-nav__toggle[aria-expanded="true"] .portal-nav__toggle-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .portal-nav__toggle[aria-expanded="true"] .portal-nav__toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+  .portal-nav__toggle[aria-expanded="true"] .portal-nav__toggle-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
   }
 }
 
