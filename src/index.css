@@ -194,21 +194,32 @@ p {
 .landing-editions {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  column-gap: 40px;
+  /* One row track per content row so both columns can share them via subgrid:
+     image, title, sub-line, prices, submit button. */
+  grid-template-rows: auto auto auto auto auto;
   align-items: start;
 }
 
 .edition {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: 1 / span 5;
   text-align: center;
 }
 
 .edition__img {
-  max-width: 300px;
-  margin: 0 auto 26px;
+  height: 380px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .edition__img img {
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
   height: auto;
   display: block;
   box-shadow: 0 6px 26px rgba(0, 0, 0, 0.12);
@@ -217,7 +228,7 @@ p {
 .edition__title {
   font-size: 1rem;
   font-weight: 400;
-  margin: 0 0 6px;
+  margin: 0 0 4px;
 }
 
 .edition__title strong {
@@ -227,20 +238,20 @@ p {
 .edition__sub {
   font-size: 0.9rem;
   color: #333;
-  margin: 0 0 22px;
+  margin: 0 0 10px;
   min-height: 1.1em;
 }
 
 .edition__price {
   font-size: 1.05rem;
-  line-height: 2;
+  line-height: 1.5;
   color: #222;
   margin: 0;
 }
 
 .edition__submit {
   display: inline-block;
-  margin-top: 26px;
+  margin-top: 12px;
   color: #e6007e;
   font-size: 1.5rem;
   line-height: 1.25;
@@ -1041,7 +1052,7 @@ p {
 }
 
 .homme__hero {
-  max-width: 470px;
+  max-width: 720px;
 }
 
 .homme__feature {
@@ -1180,6 +1191,24 @@ p {
   line-height: 1.9;
   color: #fff;
   margin: 0;
+}
+
+.homme__register {
+  margin: 60px auto 0;
+  text-align: center;
+  color: #fff;
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+.homme__register a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.homme__register a:hover {
+  opacity: 0.75;
 }
 
 .homme__gallery {

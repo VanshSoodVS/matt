@@ -34,9 +34,11 @@ export default function HomePortal() {
               <strong>COLLECTOR’S SLIPCASE EDITION</strong> launch special
             </p>
             <p className="edition__sub">Including original giclee signed print and certificate</p>
-            <p className="edition__price">South Africa&nbsp;&nbsp;R3 950</p>
-            <p className="edition__price">International US$ 380</p>
-            <p className="edition__price">FedEx Priority Included</p>
+            <div className="edition__prices">
+              <p className="edition__price">South Africa&nbsp;&nbsp;R3 450</p>
+              <p className="edition__price">International US$ 320</p>
+              <p className="edition__price">FedEx Priority Included</p>
+            </div>
             <a className="edition__submit" href={mailto("Collector’s Slipcase Edition")}>
               SUBMIT YOUR
               <br />
@@ -52,9 +54,11 @@ export default function HomePortal() {
               <strong>SIGNED FIRST EDITION</strong>
             </p>
             <p className="edition__sub">&nbsp;</p>
-            <p className="edition__price">South Africa&nbsp;&nbsp;R2 950</p>
-            <p className="edition__price">International US$ 280</p>
-            <p className="edition__price">FedEx Priority Included</p>
+            <div className="edition__prices">
+              <p className="edition__price">South Africa&nbsp;&nbsp;R2 850</p>
+              <p className="edition__price">International US$ 260</p>
+              <p className="edition__price">FedEx Priority Included</p>
+            </div>
             <a className="edition__submit" href={mailto("Signed First Edition")}>
               SUBMIT YOUR
               <br />

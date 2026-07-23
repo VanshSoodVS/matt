@@ -9,9 +9,9 @@ export const portalNav = [
   { label: "Artist", to: "/artist", external: false },
   { label: "Legacy", to: "/analogue", external: false },
   { label: "Contemporary", to: "/digital", external: false },
-  { label: "Books", to: "/digital/books", external: false },
   { label: "Homme", to: "/homme", external: false },
   { label: "Exhibition", to: "/exhibition", external: false },
+  { label: "Books", to: "/digital/books", external: false },
   { label: "Contact", to: "/digital/contact", external: false },
 ];
 

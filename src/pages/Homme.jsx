@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const IMG = "/wp-content/uploads/homme-images";
 const BOX = "/wp-content/uploads/landing-images";
 
@@ -116,8 +118,8 @@ export default function Homme() {
               <br />
               Limited to 150 only
             </p>
-            <p className="homme-edition__price">South Africa&nbsp;&nbsp;R3 950</p>
-            <p className="homme-edition__price">International US$ 380</p>
+            <p className="homme-edition__price">South Africa&nbsp;&nbsp;R3 450</p>
+            <p className="homme-edition__price">International US$ 320</p>
             <p className="homme-edition__price">FedEx priority included</p>
           </div>
 
@@ -127,11 +129,16 @@ export default function Homme() {
             </div>
             <h3 className="homme-edition__title">SIGNED FIRST EDITION</h3>
             <p className="homme-edition__note">Limited to 600 only</p>
-            <p className="homme-edition__price">South Africa&nbsp;&nbsp;R2 950</p>
-            <p className="homme-edition__price">International US$ 280</p>
+            <p className="homme-edition__price">South Africa&nbsp;&nbsp;R2 850</p>
+            <p className="homme-edition__price">International US$ 260</p>
             <p className="homme-edition__price">FedEx priority included</p>
           </div>
         </div>
+
+        <p className="homme__register">
+          Register your email address to pre order on the{" "}
+          <Link to="/">LANDING PAGE</Link>
+        </p>
 
         <div className="homme__gallery">
           {PLATES.map((f) => (
