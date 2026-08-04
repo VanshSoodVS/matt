@@ -6,15 +6,14 @@ const BOX = "/wp-content/uploads/landing-images";
 // The five fine-art plates from the HOMME collection (assets already censored).
 const PLATES = ["44.jpg", "31.jpg", "46.jpg", "95.jpg", "5.jpg"];
 
-// Quote laid out as a staggered cascade (per-line left indent, in em).
+// Quote: centered, one entry per line.
 const QUOTE = [
-  { t: "“It is immediately apparent", pl: 5.5 },
-  { t: "that this project represents", pl: 13.5 },
-  { t: "an extraordinary commitment of", pl: 4 },
-  { t: "time, vision, and craftsmanship.", pl: 10 },
-  { t: "The photographs are beautifully executed,", pl: 0, gap: true },
-  { t: "and the quality of both the work", pl: 10.5 },
-  { t: "and the production is of the highest order.”", pl: 1 },
+  "“It is immediately apparent",
+  "that this project represents",
+  "an extraordinary commitment of",
+  "time, vision, and craftsmanship.",
+  "The photographs are beautifully executed, and the quality of both the work",
+  "and the production is of the highest order.”",
 ];
 
 const SPECS = [
@@ -38,13 +37,8 @@ export default function Homme() {
 
         <div className="homme__text">
           <blockquote className="homme__quote">
-            {QUOTE.map((l, i) => (
-              <span
-                key={i}
-                style={{ paddingLeft: `${l.pl}em`, marginTop: l.gap ? "1.1em" : undefined }}
-              >
-                {l.t}
-              </span>
+            {QUOTE.map((line, i) => (
+              <span key={i}>{line}</span>
             ))}
           </blockquote>
 
@@ -130,7 +124,7 @@ export default function Homme() {
             <h3 className="homme-edition__title">SIGNED FIRST EDITION</h3>
             <p className="homme-edition__note">Limited to 600 only</p>
             <p className="homme-edition__price">South Africa&nbsp;&nbsp;R2 850</p>
-            <p className="homme-edition__price">International US$ 260</p>
+            <p className="homme-edition__price">International US$ 280</p>
             <p className="homme-edition__price">FedEx priority included</p>
           </div>
         </div>

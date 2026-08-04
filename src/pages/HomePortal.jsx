@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import TopNav from "../components/TopNav.jsx";
 
 const BASE = "/wp-content/uploads/landing-images";
-const HERO = `${BASE}/homme-hero.jpg`;
+const HERO = `${BASE}/WEBSITE%20landing%20page%20image_v2.jpg`;
 const BOX1 = `${BASE}/homme-box-1.jpg`;
 const BOX2 = `${BASE}/homme-box-2.jpg`;
 
@@ -40,9 +40,9 @@ export default function HomePortal() {
               <p className="edition__price">FedEx Priority Included</p>
             </div>
             <a className="edition__submit" href={mailto("Collector’s Slipcase Edition")}>
-              SUBMIT YOUR
+              SUBMIT YOUR PRE-ORDER
               <br />
-              EMAIL HERE
+              REGISTRATION EMAIL HERE
             </a>
           </div>
 
@@ -56,13 +56,13 @@ export default function HomePortal() {
             <p className="edition__sub">&nbsp;</p>
             <div className="edition__prices">
               <p className="edition__price">South Africa&nbsp;&nbsp;R2 850</p>
-              <p className="edition__price">International US$ 260</p>
+              <p className="edition__price">International US$ 280</p>
               <p className="edition__price">FedEx Priority Included</p>
             </div>
             <a className="edition__submit" href={mailto("Signed First Edition")}>
-              SUBMIT YOUR
+              SUBMIT YOUR PRE-ORDER
               <br />
-              EMAIL HERE
+              REGISTRATION EMAIL HERE
             </a>
           </div>
         </div>
