@@ -71,6 +71,21 @@ export default function HomePortal() {
           Click here to view book
         </Link>
       </div>
+
+      <section className="landing-video">
+        <div className="landing-video__frame">
+          <video
+            className="landing-video__player"
+            controls
+            preload="metadata"
+            playsInline
+            poster={HERO}
+          >
+            <source src={`${BASE}/homme-intro.mp4`} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </section>
     </div>
   );
 }
