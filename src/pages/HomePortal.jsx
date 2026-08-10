@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import TopNav from "../components/TopNav.jsx";
+import CopyEmail from "../components/CopyEmail.jsx";
+import Footer from "../components/Footer.jsx";
 
 const BASE = "/wp-content/uploads/landing-images";
 const HERO = `${BASE}/WEBSITE%20landing%20page%20image_v2.jpg`;
@@ -67,6 +69,8 @@ export default function HomePortal() {
           </div>
         </div>
 
+        <CopyEmail email={EMAIL} />
+
         <Link className="landing-viewbook" to="/homme">
           Click here to view book
         </Link>
@@ -86,6 +90,8 @@ export default function HomePortal() {
           </video>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }

@@ -11,6 +11,10 @@ import Collection from "./pages/Collection.jsx";
 import Contact from "./pages/Contact.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
+// Legal / policy pages (footer-linked; required for PayFast + SA compliance).
+import Terms from "./pages/legal/Terms.jsx";
+import Shipping from "./pages/legal/Shipping.jsx";
+
 // Digital Collection (formerly digital.matthewwillman.co.za), now internal.
 import DigitalLayout from "./digital/DigitalLayout.jsx";
 import DigitalHome from "./digital/pages/DigitalHome.jsx";
@@ -54,6 +58,10 @@ export default function App() {
         <Route path="/artist" element={withLayout(<Artist />)} />
         <Route path="/exhibition" element={withLayout(<Exhibition />)} />
         <Route path="/homme" element={withLayout(<Homme />)} />
+
+        {/* Legal / policy pages */}
+        <Route path="/terms" element={withLayout(<Terms />)} />
+        <Route path="/shipping" element={withLayout(<Shipping />)} />
         <Route path="/legacy" element={withLayout(<Hub name="legacy" />)} />
         <Route path="/contemporary" element={withLayout(<Hub name="contemporary" />)} />
         <Route path="/contact" element={withLayout(<Contact />)} />
