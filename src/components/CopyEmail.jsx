@@ -29,8 +29,7 @@ export default function CopyEmail({ email }) {
 
   return (
     <p className="landing-directemail">
-      If the link above doesn’t open your email app, copy our address and email us
-      directly:
+      Have a question about your pre-order? Email us directly:
       <br />
       <a href={`mailto:${email}`}>{email}</a>
       <button type="button" className="landing-copybtn" onClick={copy}>

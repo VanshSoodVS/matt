@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
+import { EDITIONS, formatZAR, formatUSD } from "../data/editions.js";
 
 const IMG = "/wp-content/uploads/homme-images";
 const BOX = "/wp-content/uploads/landing-images";
 
 // The five fine-art plates from the HOMME collection (assets already censored).
 const PLATES = ["44.jpg", "31.jpg", "46.jpg", "95.jpg", "5.jpg"];
+
+const [ED_SLIPCASE, ED_FIRST] = EDITIONS;
 
 // Quote: centered, one entry per line.
 const QUOTE = [
@@ -112,9 +115,12 @@ export default function Homme() {
               <br />
               Limited to 150 only
             </p>
-            <p className="homme-edition__price">South Africa&nbsp;&nbsp;R3 450</p>
-            <p className="homme-edition__price">International US$ 320</p>
+            <p className="homme-edition__price">South Africa&nbsp;&nbsp;{formatZAR(ED_SLIPCASE.priceZAR)}</p>
+            <p className="homme-edition__price">International {formatUSD(ED_SLIPCASE.priceUSD)}</p>
             <p className="homme-edition__price">FedEx priority included</p>
+            <Link className="homme-edition__cta" to={`/checkout?edition=${ED_SLIPCASE.slug}`}>
+              PRE-ORDER NOW
+            </Link>
           </div>
 
           <div className="homme-edition">
@@ -123,15 +129,17 @@ export default function Homme() {
             </div>
             <h3 className="homme-edition__title">SIGNED FIRST EDITION</h3>
             <p className="homme-edition__note">Limited to 600 only</p>
-            <p className="homme-edition__price">South Africa&nbsp;&nbsp;R2 850</p>
-            <p className="homme-edition__price">International US$ 280</p>
+            <p className="homme-edition__price">South Africa&nbsp;&nbsp;{formatZAR(ED_FIRST.priceZAR)}</p>
+            <p className="homme-edition__price">International {formatUSD(ED_FIRST.priceUSD)}</p>
             <p className="homme-edition__price">FedEx priority included</p>
+            <Link className="homme-edition__cta" to={`/checkout?edition=${ED_FIRST.slug}`}>
+              PRE-ORDER NOW
+            </Link>
           </div>
         </div>
 
         <p className="homme__register">
-          Register your email address to pre order on the{" "}
-          <Link to="/">LANDING PAGE</Link>
+          Secure checkout — pay by card or Instant EFT via PayFast.
         </p>
 
         <div className="homme__gallery">

@@ -15,6 +15,11 @@ import NotFound from "./pages/NotFound.jsx";
 import Terms from "./pages/legal/Terms.jsx";
 import Shipping from "./pages/legal/Shipping.jsx";
 
+// Checkout + PayFast order flow.
+import Checkout from "./pages/Checkout.jsx";
+import OrderComplete from "./pages/OrderComplete.jsx";
+import OrderCancelled from "./pages/OrderCancelled.jsx";
+
 // Digital Collection (formerly digital.matthewwillman.co.za), now internal.
 import DigitalLayout from "./digital/DigitalLayout.jsx";
 import DigitalHome from "./digital/pages/DigitalHome.jsx";
@@ -62,6 +67,11 @@ export default function App() {
         {/* Legal / policy pages */}
         <Route path="/terms" element={withLayout(<Terms />)} />
         <Route path="/shipping" element={withLayout(<Shipping />)} />
+
+        {/* Checkout + PayFast order flow */}
+        <Route path="/checkout" element={withLayout(<Checkout />)} />
+        <Route path="/order-complete" element={withLayout(<OrderComplete />)} />
+        <Route path="/order-cancelled" element={withLayout(<OrderCancelled />)} />
         <Route path="/legacy" element={withLayout(<Hub name="legacy" />)} />
         <Route path="/contemporary" element={withLayout(<Hub name="contemporary" />)} />
         <Route path="/contact" element={withLayout(<Contact />)} />

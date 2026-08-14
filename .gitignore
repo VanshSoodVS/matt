@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# PayFast — server secrets and live order records must never be committed
+public/pay/config.php
+public/pay/orders/*.json
+public/pay/orders/itn.log
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
