@@ -15,7 +15,8 @@ dist-ssr
 # PayFast — server secrets and live order records must never be committed
 public/pay/config.php
 public/pay/orders/*.json
-public/pay/orders/itn.log
+public/pay/orders/*.log
+public/pay/orders/.last_purge
 
 # Editor directories and files
 .vscode/*

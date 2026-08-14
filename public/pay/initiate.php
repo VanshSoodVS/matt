@@ -18,6 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $cfg      = pf_config();
 $editions = require __DIR__ . '/editions.php';
 
+// Opportunistic housekeeping: at most once a day, delete abandoned (never-paid)
+// pre-orders. A cron running purge.php is the primary trigger; this is a safe
+// no-cron fallback and can never affect the checkout below.
+pf_maybe_purge_pending((int) (isset($cfg['purge_pending_days']) ? $cfg['purge_pending_days'] : 30));
+
 // ---- Read + validate input -------------------------------------------------
 $post = function ($k) {
     return isset($_POST[$k]) ? trim((string) $_POST[$k]) : '';
@@ -31,7 +36,7 @@ if (!isset($editions[$slug])) {
 
 $qty = (int) $post('quantity');
 if ($qty < 1) { $qty = 1; }
-if ($qty > 10) { $qty = 10; }
+if ($qty > 5) { $qty = 5; } // keep in sync with the quantity options in src/pages/Checkout.jsx
 
 $fullName = $post('full_name');
 $email    = filter_var($post('email'), FILTER_VALIDATE_EMAIL);

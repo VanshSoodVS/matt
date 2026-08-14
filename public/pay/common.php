@@ -167,3 +167,74 @@ function pf_load_order($id)
     }
     return json_decode(file_get_contents($path), true);
 }
+
+// -----------------------------------------------------------------------------
+// Maintenance: purge abandoned (never-paid) pre-orders. See purge.php.
+// -----------------------------------------------------------------------------
+
+/** Path to the throttle marker used by the opportunistic purge. */
+function pf_purge_marker()
+{
+    return pf_orders_dir() . '/.last_purge';
+}
+
+/**
+ * Delete PENDING order records older than $maxAgeDays. Orders that reached any
+ * other status (paid, cancelled, ...) are NEVER touched, and files we cannot
+ * parse are left alone. Returns the list of affected order ids; with
+ * $dryRun = true nothing is deleted (preview only).
+ */
+function pf_purge_pending($maxAgeDays = 30, $dryRun = false)
+{
+    $dir    = pf_orders_dir();
+    $cutoff = time() - ((int) $maxAgeDays * 86400);
+    $ids    = [];
+
+    foreach (glob($dir . '/*.json') ?: [] as $path) {
+        $raw = @file_get_contents($path);
+        if ($raw === false) {
+            continue;
+        }
+        $order = json_decode($raw, true);
+        // Only ever touch well-formed records that are still pending.
+        if (!is_array($order) || (isset($order['status']) ? $order['status'] : '') !== 'pending') {
+            continue;
+        }
+        // Age from the recorded created time, falling back to the file mtime.
+        $created = isset($order['created']) ? strtotime($order['created']) : false;
+        if ($created === false) {
+            $created = @filemtime($path);
+        }
+        if ($created === false || $created > $cutoff) {
+            continue; // unknown age, or still inside the retention window
+        }
+        if (!$dryRun) {
+            @unlink($path);
+        }
+        $ids[] = isset($order['m_payment_id']) ? $order['m_payment_id'] : basename($path, '.json');
+    }
+
+    return $ids;
+}
+
+/**
+ * Opportunistic version for the request path: runs pf_purge_pending() at most
+ * once every 24h and can never interrupt the caller (all failures swallowed).
+ * A dedicated cron running purge.php is preferred; this keeps the orders folder
+ * tidy even when no cron is configured.
+ */
+function pf_maybe_purge_pending($maxAgeDays = 30)
+{
+    $marker = pf_purge_marker();
+    $last   = is_file($marker) ? (int) @file_get_contents($marker) : 0;
+    if ((time() - $last) < 86400) {
+        return;
+    }
+    // Claim the slot up front so concurrent requests don't all purge at once.
+    @file_put_contents($marker, (string) time(), LOCK_EX);
+    try {
+        pf_purge_pending($maxAgeDays, false);
+    } catch (\Throwable $e) {
+        // Housekeeping must never break checkout.
+    }
+}

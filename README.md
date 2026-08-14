@@ -28,7 +28,8 @@ npm run preview  # preview the production build locally
 public/
   wp-content/uploads/...   all site imagery (preserves the original WP paths)
   favicon.png
-  _redirects               SPA fallback for static hosts (Netlify-style)
+  .htaccess                Apache SPA routing + asset caching (xneelo)
+  pay/                     PHP PayFast payment backend (see Deploying)
 src/
   main.jsx                 app entry; sets up BrowserRouter
   App.jsx                  route table
@@ -169,9 +170,43 @@ src/
 
 ## Deploying
 
-This is a client-side routed SPA, so the host must serve `index.html` for
-unknown paths:
+⚠️ **This site includes a PHP payment backend** (PayFast) under `public/pay/`, so the live
+site **must be hosted on a PHP/Apache host** — the target is **xneelo**. Static hosts such as
+**Vercel and Netlify cannot execute the PHP**: they would serve `pay/*.php` as raw source,
+which breaks checkout and would expose `config.php`. They are therefore **not supported** for
+the live site (this is why the old `vercel.json` / `_redirects` static-host configs were
+removed).
 
-- **Netlify** — the included `public/_redirects` handles it.
-- **Vercel** — add a rewrite of `/(.*)` → `/index.html`.
-- **Apache/Nginx/other static hosts** — add an equivalent SPA fallback rule.
+**Deploy steps (Apache / xneelo):**
+
+1. `npm run build` — produces `dist/`, which already contains the SPA **and** the payment
+   backend: `dist/pay/*.php`, the SPA-routing `dist/.htaccess`, and `dist/pay/orders/.htaccess`
+   (which denies HTTP access to stored order records). Vite copies the whole `public/` tree
+   verbatim, dotfiles included — verified.
+2. Upload the **contents of `dist/`** to the web root (e.g. `public_html/`).
+3. Create `pay/config.php` on the server from `pay/config.sample.php` and fill in the real
+   PayFast credentials (`merchant_id`, `merchant_key`, `passphrase`), the canonical `site_url`,
+   and `merchant_email`. `config.php` is git-ignored and must **never** be committed. Start with
+   `sandbox => true`, test, then flip to `false` for live.
+
+The bundled `.htaccess` serves real files/directories as-is (so `/pay/*.php` execute) and falls
+back to `index.html` for client-side routes. Setup details and the four ITN security checks are
+documented in the header comments of the files under `public/pay/`.
+
+### Maintenance — purging abandoned pre-orders
+
+Submitting the checkout form writes a `pending` order record; if the buyer never pays, that
+record (with their contact + delivery details) lingers. `public/pay/purge.php` deletes
+`pending` records older than `purge_pending_days` (default **30**) — **paid orders are never
+touched**. Schedule it daily via cron on xneelo:
+
+```bash
+# CLI (preferred)
+php /home/<account>/public_html/pay/purge.php
+
+# or URL-based cron — requires 'purge_token' in config.php
+wget -qO- "https://<your-site>/pay/purge.php?token=YOUR_TOKEN"
+```
+
+Preview first with `php purge.php --dry-run` (or `&dry=1` on the URL). As a fallback, checkout
+itself runs the same purge at most once a day, so the folder stays tidy even without cron.

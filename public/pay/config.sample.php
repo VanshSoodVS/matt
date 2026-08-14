@@ -33,4 +33,13 @@ return [
 
     // Send the buyer a simple confirmation email too (in addition to PayFast's).
     'email_buyer'    => true,
+
+    // --- Maintenance (see pay/purge.php) -----------------------------------
+    // Abandoned pre-orders (submitted but never paid) are deleted after this
+    // many days. Paid orders are kept indefinitely.
+    'purge_pending_days' => 30,
+
+    // Optional secret to allow triggering purge.php over HTTPS from a URL-based
+    // cron: /pay/purge.php?token=THIS. Leave empty to keep purge.php CLI-only.
+    'purge_token'        => '',
 ];
