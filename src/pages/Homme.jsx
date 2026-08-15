@@ -35,7 +35,7 @@ export default function Homme() {
         <img
           className="homme__hero"
           src={`${IMG}/6.jpg`}
-          alt="HOMME — Form. Strength. Simplicity. by Matthew Willman"
+          alt="HOMME - Form. Strength. Simplicity. by Matthew Willman"
         />
 
         <div className="homme__text">
@@ -139,12 +139,12 @@ export default function Homme() {
         </div>
 
         <p className="homme__register">
-          Secure checkout — pay by card or Instant EFT via PayFast.
+          Secure checkout - pay by card or Instant EFT via PayFast.
         </p>
 
         <div className="homme__gallery">
           {PLATES.map((f) => (
-            <img key={f} src={`${IMG}/${f}`} alt="HOMME — fine-art photograph by Matthew Willman" loading="lazy" />
+            <img key={f} src={`${IMG}/${f}`} alt="HOMME - fine-art photograph by Matthew Willman" loading="lazy" />
           ))}
         </div>
 

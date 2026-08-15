@@ -19,18 +19,18 @@ export default function HomePortal() {
       <TopNav />
 
       <section className="landing-hero">
-        <img src={HERO} alt="HOMME by Matthew Willman — launching October 2026" />
+        <img src={HERO} alt="HOMME by Matthew Willman - launching October 2026" />
       </section>
 
       <div className="landing-body">
         <p className="landing-register">
-          Secure your copy — pre-order now before the public release
+          Secure your copy - pre-order now before the public release
         </p>
 
         <div className="landing-editions">
           <div className="edition">
             <div className="edition__img">
-              <img src={BOX1} alt="HOMME — Collector’s Slipcase Edition" />
+              <img src={BOX1} alt="HOMME - Collector’s Slipcase Edition" />
             </div>
             <p className="edition__title">
               <strong>COLLECTOR’S SLIPCASE EDITION</strong> launch special
@@ -48,7 +48,7 @@ export default function HomePortal() {
 
           <div className="edition">
             <div className="edition__img">
-              <img src={BOX2} alt="HOMME — Signed First Edition" />
+              <img src={BOX2} alt="HOMME - Signed First Edition" />
             </div>
             <p className="edition__title">
               <strong>SIGNED FIRST EDITION</strong>

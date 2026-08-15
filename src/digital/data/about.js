@@ -40,7 +40,7 @@ export const aboutBlocks = [
   {
     type: "quote",
     text: "Matthew’s passion and enthusiasm for his art, his sensitivity and love of people is immediately felt. This is how his magic begins, allowing his vision and mastery to come through his camera then onto paper. Willman’s work is a gift, an artist of world-class standing.",
-    cite: "Monsieur Hubert Hermès — House of Hermès, Paris",
+    cite: "Monsieur Hubert Hermès - House of Hermès, Paris",
   },
   {
     type: "quote",

@@ -80,14 +80,14 @@ export default function App() {
           <Route key={slug} path={`/${slug}`} element={withLayout(<Collection slug={slug} />)} />
         ))}
 
-        {/* Digital Collection — internal section under /digital */}
+        {/* Digital Collection - internal section under /digital */}
         <Route path="/digital" element={withDigital(<DigitalHome />)} />
         <Route path="/digital/about" element={withDigital(<About />)} />
         <Route path="/digital/books" element={withDigital(<Books />)} />
         <Route path="/digital/contact" element={withDigital(<DigitalContact />)} />
         <Route path="/digital/:slug" element={withDigital(<PhotoEssay />)} />
 
-        {/* Analogue Collection — internal section under /analogue */}
+        {/* Analogue Collection - internal section under /analogue */}
         <Route path="/analogue" element={withAnalogue(<AnalogueHome />)} />
         <Route
           path="/analogue/about-collections"

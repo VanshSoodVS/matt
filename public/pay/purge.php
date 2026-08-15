@@ -1,8 +1,8 @@
 <?php
 // -----------------------------------------------------------------------------
 // Maintenance script: delete abandoned PENDING pre-orders older than N days
-// (default 30, set via 'purge_pending_days' in config.php). Paid orders — and
-// anything that is not 'pending' — are NEVER touched.
+// (default 30, set via 'purge_pending_days' in config.php). Paid orders - and
+// anything that is not 'pending' - are NEVER touched.
 //
 // Run it daily with a cron job. On xneelo (konsoleH -> Cron Jobs) use either:
 //

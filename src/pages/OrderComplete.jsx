@@ -1,6 +1,6 @@
 import { Link, useSearchParams } from "react-router-dom";
 
-// PayFast return_url landing. This is a courtesy thank-you only — payment is
+// PayFast return_url landing. This is a courtesy thank-you only - payment is
 // confirmed server-side via the ITN webhook, not by the buyer reaching here.
 export default function OrderComplete() {
   const [params] = useSearchParams();

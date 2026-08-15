@@ -1,5 +1,5 @@
 /* ==========================================================================
-   The Willman Collection Portal — global styles
+   The Willman Collection Portal - global styles
    Recreates the look of the original WordPress / Flatsome theme.
    ========================================================================== */
 
@@ -106,7 +106,7 @@ p {
 }
 
 /* ==========================================================================
-   Site header (inner pages) — centered logo
+   Site header (inner pages) - centered logo
    ========================================================================== */
 .site-header {
   background: var(--bg-white);
@@ -200,7 +200,7 @@ p {
 }
 
 /* ==========================================================================
-   Home / landing page — HOMME book launch
+   Home / landing page - HOMME book launch
    ========================================================================== */
 .landing {
   background: var(--bg-white);
@@ -721,7 +721,7 @@ p {
   padding-right: 24px;
 }
 
-/* Artist page — text left, portrait right (sticky). */
+/* Artist page - text left, portrait right (sticky). */
 .artist {
   display: flex;
   align-items: flex-start;
@@ -838,7 +838,7 @@ p {
 }
 
 /* ==========================================================================
-   Hub pages (Legacy / Contemporary) — stacked large images
+   Hub pages (Legacy / Contemporary) - stacked large images
    ========================================================================== */
 .hub {
   padding: 40px 0 60px;
@@ -1204,7 +1204,7 @@ p {
 }
 
 /* ==========================================================================
-   HOMME book page (/homme) — grey backdrop, centred content
+   HOMME book page (/homme) - grey backdrop, centred content
    ========================================================================== */
 .homme {
   background: #949494;
@@ -1642,6 +1642,16 @@ p {
   font-size: 1.1rem;
 }
 
+.checkout__approx {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 2px;
+}
+
+.checkout__approx dd {
+  font-weight: 400;
+}
+
 .checkout__fx {
   margin: 16px 0 0;
   font-size: 0.8rem;
@@ -1675,6 +1685,12 @@ p {
   height: 1px;
   overflow: hidden;
   clip: rect(0 0 0 0);
+}
+
+.field__hint {
+  font-size: 0.78rem;
+  color: #777;
+  line-height: 1.45;
 }
 
 .field__input {
@@ -1743,6 +1759,105 @@ p {
   color: #666;
   margin: 0;
   text-align: center;
+}
+
+/* ---- EFT / bank-transfer alternative ---- */
+.eft {
+  max-width: 640px;
+  margin: 40px auto 0;
+}
+
+.eft__divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #999;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 28px;
+}
+
+.eft__divider::before,
+.eft__divider::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid #e0e0e0;
+}
+
+.eft__divider span {
+  padding: 0 14px;
+}
+
+.eft__title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+
+.eft__title-note {
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: #e6007e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: 6px;
+}
+
+.eft__lead {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: #333;
+  margin: 0 0 20px;
+}
+
+.eft__lead a {
+  color: #111;
+  text-decoration: underline;
+}
+
+.eft__details {
+  margin: 0 0 22px;
+  border: 1px solid #ececec;
+  background: #f6f6f6;
+}
+
+.eft__details > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+}
+
+.eft__details > div:not(:last-child) {
+  border-bottom: 1px solid #ececec;
+}
+
+.eft__details dt {
+  color: #666;
+  margin: 0;
+}
+
+.eft__details dd {
+  margin: 0;
+  font-weight: 700;
+  text-align: right;
+}
+
+.eft__email-btn {
+  display: inline-block;
+  padding: 13px 24px;
+  border: 1px solid #e6007e;
+  color: #e6007e;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.eft__email-btn:hover {
+  background: #e6007e;
+  color: #fff;
 }
 
 /* ==========================================================================

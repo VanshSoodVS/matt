@@ -1,4 +1,4 @@
-# The Willman Collection Portal — React
+# The Willman Collection Portal - React
 
 A React conversion of the Matthew Willman / **The Willman Collection** website
 (originally a WordPress + Flatsome site exported to static HTML with the Simply
@@ -7,7 +7,7 @@ as possible.
 
 It also incorporates the **Digital Collection** (formerly the separate
 `digital.matthewwillman.co.za` subdomain) as an internal section under
-`/digital`, so the subdomain can be retired — the portal's *Contemporary*,
+`/digital`, so the subdomain can be retired - the portal's *Contemporary*,
 *Books* and *Contact* links, and the *MW Collection Digital* tile, now point to
 internal routes.
 
@@ -66,8 +66,8 @@ src/
       books.js             Books page content
       about.js             About / Biography content
     pages/ (DigitalHome, PhotoEssay, About, Books, DigitalContact)
-      DigitalHome.jsx      "/digital" — Photo Essays grid
-      PhotoEssay.jsx       "/digital/:slug" — gallery + lightbox
+      DigitalHome.jsx      "/digital" - Photo Essays grid
+      PhotoEssay.jsx       "/digital/:slug" - gallery + lightbox
       About.jsx            "/digital/about"
       Books.jsx            "/digital/books"
       DigitalContact.jsx   "/digital/contact"
@@ -93,10 +93,10 @@ src/
 | `/mandela`, `/robben-island`, `/tuisland`, `/african-child` | Legacy collections |
 | `/i-am-san`, `/private-space`, `/shape-of-light`, `/black` | Contemporary collections |
 | `/contact` | Contact |
-| `/digital` | Digital Collection — Photo Essays grid |
+| `/digital` | Digital Collection - Photo Essays grid |
 | `/digital/:slug` | A photo essay (16 galleries, e.g. `/digital/our-mandela`, `/digital/black`) |
 | `/digital/about` · `/digital/books` · `/digital/contact` | Digital Collection pages |
-| `/analogue` | Analogue Collection — collections grid (the portal's **Legacy** link) |
+| `/analogue` | Analogue Collection - collections grid (the portal's **Legacy** link) |
 | `/analogue/:slug` | A collection gallery (14, e.g. `/analogue/tuisland`, `/analogue/great-zimbabwe-ruins`) |
 | `/analogue/about-collections` · `/analogue/artist-statement` | Analogue Collection pages |
 
@@ -147,7 +147,7 @@ src/
 ### Analogue Collection (`/analogue`)
 
 - The former `analogue.matthewwillman.co.za` site is merged in the same way as
-  the digital one — it shares the site-wide nav/footer, and the portal's
+  the digital one - it shares the site-wide nav/footer, and the portal's
   **Legacy** menu item (and the *MW Collection Analogue* tile) now open
   `/analogue` with the nav still in place.
 - It reuses the shared `CollectionGallery` / `EssayGrid` components and the same
@@ -155,7 +155,7 @@ src/
   included; *The Savé Collection* (in the menu but not on the live home grid)
   is appended so it's reachable. Each grid tile uses its collection's real page
   title.
-- The 150+ individual artwork pages from the export were **not** converted —
+- The 150+ individual artwork pages from the export were **not** converted -
   they are blog-style detail pages (date / author / prev-next) with no unique
   content; each artwork already appears in its collection's gallery + lightbox.
   Archive/pagination pages (`/page/N`, `/author`, `/category`) were skipped too.
@@ -165,13 +165,13 @@ src/
   generic filenames (`1.jpg`, `6.jpg`, …) don't collide with the other sites'
   assets.
 
-> **Both subdomains can now be retired** — nothing in the app links out to
+> **Both subdomains can now be retired** - nothing in the app links out to
 > `digital.` or `analogue.matthewwillman.co.za` anymore.
 
 ## Deploying
 
 ⚠️ **This site includes a PHP payment backend** (PayFast) under `public/pay/`, so the live
-site **must be hosted on a PHP/Apache host** — the target is **xneelo**. Static hosts such as
+site **must be hosted on a PHP/Apache host** - the target is **xneelo**. Static hosts such as
 **Vercel and Netlify cannot execute the PHP**: they would serve `pay/*.php` as raw source,
 which breaks checkout and would expose `config.php`. They are therefore **not supported** for
 the live site (this is why the old `vercel.json` / `_redirects` static-host configs were
@@ -179,10 +179,10 @@ removed).
 
 **Deploy steps (Apache / xneelo):**
 
-1. `npm run build` — produces `dist/`, which already contains the SPA **and** the payment
+1. `npm run build` - produces `dist/`, which already contains the SPA **and** the payment
    backend: `dist/pay/*.php`, the SPA-routing `dist/.htaccess`, and `dist/pay/orders/.htaccess`
    (which denies HTTP access to stored order records). Vite copies the whole `public/` tree
-   verbatim, dotfiles included — verified.
+   verbatim, dotfiles included - verified.
 2. Upload the **contents of `dist/`** to the web root (e.g. `public_html/`).
 3. Create `pay/config.php` on the server from `pay/config.sample.php` and fill in the real
    PayFast credentials (`merchant_id`, `merchant_key`, `passphrase`), the canonical `site_url`,
@@ -193,18 +193,18 @@ The bundled `.htaccess` serves real files/directories as-is (so `/pay/*.php` exe
 back to `index.html` for client-side routes. Setup details and the four ITN security checks are
 documented in the header comments of the files under `public/pay/`.
 
-### Maintenance — purging abandoned pre-orders
+### Maintenance - purging abandoned pre-orders
 
 Submitting the checkout form writes a `pending` order record; if the buyer never pays, that
 record (with their contact + delivery details) lingers. `public/pay/purge.php` deletes
-`pending` records older than `purge_pending_days` (default **30**) — **paid orders are never
+`pending` records older than `purge_pending_days` (default **30**) - **paid orders are never
 touched**. Schedule it daily via cron on xneelo:
 
 ```bash
 # CLI (preferred)
 php /home/<account>/public_html/pay/purge.php
 
-# or URL-based cron — requires 'purge_token' in config.php
+# or URL-based cron - requires 'purge_token' in config.php
 wget -qO- "https://<your-site>/pay/purge.php?token=YOUR_TOKEN"
 ```
 

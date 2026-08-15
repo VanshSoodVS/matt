@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-// PayFast cancel_url landing — the buyer backed out before paying.
+// PayFast cancel_url landing - the buyer backed out before paying.
 export default function OrderCancelled() {
   return (
     <div className="order-status">

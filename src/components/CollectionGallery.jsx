@@ -33,12 +33,12 @@ export default function CollectionGallery({
         raf.current = 0;
         return;
       }
-      el.scrollLeft = cur + diff * 0.14; // easing factor — lower = smoother glide
+      el.scrollLeft = cur + diff * 0.14; // easing factor - lower = smoother glide
       raf.current = requestAnimationFrame(tick);
     };
 
     const onWheel = (e) => {
-      // On phones the strip is a normal vertical list — leave scrolling native.
+      // On phones the strip is a normal vertical list - leave scrolling native.
       if (window.innerWidth <= 720) return;
       const delta = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
       const max = el.scrollWidth - el.clientWidth;

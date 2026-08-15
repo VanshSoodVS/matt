@@ -4,7 +4,7 @@
 // ITN validation, and order-record storage.
 //
 // Signature + ITN logic follows PayFast's official integration spec. Keep this
-// file free of any secrets — those live only in config.php.
+// file free of any secrets - those live only in config.php.
 // -----------------------------------------------------------------------------
 
 /** Load server config (config.php). Fails closed if it is missing. */
@@ -69,15 +69,55 @@ function pf_signature(array $data, $passphrase = '')
 }
 
 /**
- * Verify an ITN signature. PayFast expects the string rebuilt from the POSTed
- * fields IN THE ORDER RECEIVED (PHP preserves $_POST order), excluding the
- * signature field, with the passphrase appended.
+ * Build the ITN parameter string EXACTLY the way PayFast does when it signs a
+ * notification: every posted field except `signature`, in the order received,
+ * url-encoded - WITHOUT skipping empty values and WITHOUT trimming (this is the
+ * key difference from the request-signing path, which we control and where we
+ * strip empties ourselves).
+ */
+function pf_itn_param_string(array $postData)
+{
+    $pairs = [];
+    foreach ($postData as $key => $val) {
+        if ($key === 'signature') {
+            continue;
+        }
+        $pairs[] = $key . '=' . urlencode((string) $val);
+    }
+    return implode('&', $pairs);
+}
+
+/**
+ * Verify an ITN signature. Tries the passphrase-appended string first (a live
+ * account with a security passphrase set), then falls back to no passphrase
+ * (the PayFast sandbox is known to sign some ITNs without one). Either way the
+ * server-to-server confirmation in notify.php remains the authoritative check.
  */
 function pf_valid_signature(array $postData, $passphrase = '')
 {
     $signature = isset($postData['signature']) ? $postData['signature'] : '';
-    $calculated = pf_signature($postData, $passphrase);
-    return hash_equals($calculated, $signature);
+    $base = pf_itn_param_string($postData);
+
+    if ($passphrase !== '' && $passphrase !== null) {
+        $withPass = md5($base . '&passphrase=' . urlencode($passphrase));
+        if (hash_equals($withPass, $signature)) {
+            return true;
+        }
+    }
+    return hash_equals(md5($base), $signature);
+}
+
+/**
+ * RFC 2047-encode a mail header value so non-ASCII characters (e.g. an em dash
+ * in a subject) are transmitted safely. Falls back to stripping non-ASCII if
+ * the mbstring extension is unavailable.
+ */
+function pf_encode_header($text)
+{
+    if (function_exists('mb_encode_mimeheader')) {
+        return mb_encode_mimeheader($text, 'UTF-8', 'B', "\r\n");
+    }
+    return preg_replace('/[^\x20-\x7E]/', '-', $text);
 }
 
 /** Check the caller's IP resolves to a known PayFast host. */

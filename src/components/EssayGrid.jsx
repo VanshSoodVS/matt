@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 //
 // When `animate` is set, tiles reveal with a subtle slide + fade as they
 // scroll into view. Direction alternates every two rows (first two rows ease
-// in from the left, the next two from the right, and so on) — a sleek take on
+// in from the left, the next two from the right, and so on) - a sleek take on
 // the original analogue site's fadeInLeft / fadeInRight row animation.
 export default function EssayGrid({ title, items, basePath, animate = false, columns = 4 }) {
   // Indices that have scrolled into view (null = animation disabled).

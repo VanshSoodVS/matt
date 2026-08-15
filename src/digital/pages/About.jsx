@@ -10,7 +10,7 @@ export default function About() {
           b.type === "quote" ? (
             <blockquote key={i}>
               “{b.text}”
-              {b.cite && <cite>— {b.cite}</cite>}
+              {b.cite && <cite>- {b.cite}</cite>}
             </blockquote>
           ) : (
             <p key={i}>{b.text}</p>

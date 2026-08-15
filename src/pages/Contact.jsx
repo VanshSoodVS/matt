@@ -43,7 +43,7 @@ export default function Contact() {
           <button type="submit">Send Us a Message</button>
           {sent && (
             <p className="contact__note">
-              Thank you — your email client should now open with your message.
+              Thank you - your email client should now open with your message.
             </p>
           )}
         </form>

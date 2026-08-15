@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Digital Collection (digital.matthewwillman.co.za) — section styles.
+   Digital Collection (digital.matthewwillman.co.za) - section styles.
    Faithful to the original "thecs" theme: Josefin Sans, light theme,
    centred 880px content column, and horizontal-scroll photo-essay galleries.
    Scoped under .digital so it never clashes with the portal styles.
@@ -49,7 +49,7 @@
   padding: 9vh 20px 12vh;
 }
 
-/* Left-pinned variant (not centered) — used on the Contact page. */
+/* Left-pinned variant (not centered) - used on the Contact page. */
 .d-wrap--left {
   margin: 0;
   padding-left: clamp(18px, 3vw, 48px);
@@ -80,7 +80,7 @@
 }
 
 /* ==========================================================================
-   Home — Photo Essays grid (4 columns, square tiles, centred titles)
+   Home - Photo Essays grid (4 columns, square tiles, centred titles)
    ========================================================================== */
 .d-essays-grid {
   display: grid;
@@ -192,7 +192,7 @@
 }
 
 /* ==========================================================================
-   Photo Essay — horizontal-scroll gallery strip (thecs sc-images look)
+   Photo Essay - horizontal-scroll gallery strip (thecs sc-images look)
    ========================================================================== */
 .d-essay {
   display: flex;

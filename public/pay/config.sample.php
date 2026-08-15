@@ -3,7 +3,7 @@
 // PayFast configuration.
 //
 // SETUP: copy this file to `config.php` ON THE SERVER and fill in your real
-// credentials. `config.php` is git-ignored and must NEVER be committed — it
+// credentials. `config.php` is git-ignored and must NEVER be committed - it
 // holds the passphrase. Because it is a .php file, Apache executes it and
 // never serves its source, but keep it out of the repo regardless.
 //
@@ -22,6 +22,12 @@ return [
 
     // Where confirmed orders are emailed for fulfilment.
     'merchant_email' => 'matthew@matthewwillman.co.za',
+
+    // The "From" address for order emails. For reliable delivery to Gmail etc.,
+    // use a REAL mailbox on a domain whose SPF record authorises xneelo's mail
+    // servers (ideally an actual mailbox you host on xneelo). If left empty it
+    // defaults to no-reply@<site domain>, which many providers treat as spam.
+    'mail_from'      => '',
 
     // Canonical site origin (used to build return / cancel / notify URLs).
     'site_url'       => 'https://www.matthewwillman.com',

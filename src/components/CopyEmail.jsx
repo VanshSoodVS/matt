@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // A visible, copy-able email address as a direct fallback for anyone who would
-// rather email us — no mail app required, they can paste it into any webmail.
+// rather email us - no mail app required, they can paste it into any webmail.
 export default function CopyEmail({ email }) {
   const [copied, setCopied] = useState(false);
 
@@ -23,7 +23,7 @@ export default function CopyEmail({ email }) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Clipboard blocked (rare) — the visible address can still be selected.
+      // Clipboard blocked (rare) - the visible address can still be selected.
     }
   };
 

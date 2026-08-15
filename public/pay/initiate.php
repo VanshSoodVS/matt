@@ -4,7 +4,7 @@
 // look up the AUTHORITATIVE price server-side, sign the PayFast request, record
 // a pending order, and hand the browser off to PayFast via an auto-submit form.
 //
-// The amount is NEVER taken from the client — only the edition slug is trusted,
+// The amount is NEVER taken from the client - only the edition slug is trusted,
 // and the price comes from editions.php.
 // -----------------------------------------------------------------------------
 
@@ -38,6 +38,10 @@ $qty = (int) $post('quantity');
 if ($qty < 1) { $qty = 1; }
 if ($qty > 5) { $qty = 5; } // keep in sync with the quantity options in src/pages/Checkout.jsx
 
+// Delivery region decides the price tier (PayFast is ZAR-only, so international
+// buyers pay a higher FIXED ZAR amount). Only 'intl' or 'sa' are accepted.
+$region = ($post('region') === 'intl') ? 'intl' : 'sa';
+
 $fullName = $post('full_name');
 $email    = filter_var($post('email'), FILTER_VALIDATE_EMAIL);
 if ($fullName === '' || $email === false) {
@@ -61,7 +65,11 @@ $address = [
 $phone = $post('phone');
 
 // ---- Amount (authoritative, server-side) -----------------------------------
-$unit   = (float) $editions[$slug]['amount'];
+// Price comes from editions.php by region - never from the client.
+$unitField = ($region === 'intl' && isset($editions[$slug]['amount_intl']))
+    ? $editions[$slug]['amount_intl']
+    : $editions[$slug]['amount'];
+$unit   = (float) $unitField;
 $amount = number_format($unit * $qty, 2, '.', '');
 $itemName = $editions[$slug]['name'] . ($qty > 1 ? " x{$qty}" : '');
 
@@ -74,6 +82,7 @@ $order = [
     'edition_slug' => $slug,
     'edition_name' => $editions[$slug]['name'],
     'quantity'     => $qty,
+    'region'       => $region,
     'amount'       => $amount,
     'buyer' => [
         'name'  => $fullName,
@@ -108,7 +117,7 @@ $pfData = [
     'item_name'     => $itemName,
     'item_description' => 'HOMME limited edition pre-order',
     // Reference info surfaced in the PayFast dashboard (full record is in the order file).
-    'custom_str1'   => substr('Ship to: ' . $fullName . ' — ' . $shipSummary, 0, 255),
+    'custom_str1'   => substr('Ship to: ' . $fullName . ' - ' . $shipSummary, 0, 255),
     'custom_str2'   => substr('Phone: ' . $phone, 0, 255),
     // PayFast also emails the merchant on payment as a backstop to our ITN email.
     'email_confirmation'   => '1',

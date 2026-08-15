@@ -1,17 +1,26 @@
 import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { EDITIONS, editionBySlug, formatZAR, formatUSD } from "../data/editions.js";
+import {
+  EDITIONS,
+  editionBySlug,
+  priceForRegion,
+  formatZAR,
+  formatUSD,
+} from "../data/editions.js";
+import EftOption from "../components/EftOption.jsx";
 
 // Checkout: collect the buyer's details, then POST to the PHP endpoint which
 // signs the request server-side and hands off to PayFast. The form is a NATIVE
-// post (action=/pay/initiate.php) so it works without fetch/CORS; React only
-// drives quantity so the displayed total updates.
+// post (action=/pay/initiate.php) so it works without fetch/CORS; React drives
+// quantity + region so the displayed total and the charged price stay in step.
 export default function Checkout() {
   const [params] = useSearchParams();
   const edition = editionBySlug(params.get("edition"));
   const [qty, setQty] = useState(1);
+  const [region, setRegion] = useState("sa"); // "sa" | "intl"
+  const [country, setCountry] = useState("South Africa");
 
-  // No / unknown edition — let the visitor choose one.
+  // No / unknown edition - let the visitor choose one.
   if (!edition) {
     return (
       <div className="checkout">
@@ -30,7 +39,15 @@ export default function Checkout() {
     );
   }
 
-  const total = edition.priceZAR * qty;
+  const isIntl = region === "intl";
+  const unit = priceForRegion(edition, region);
+  const total = unit * qty;
+
+  // Keep the address country in step with the region choice.
+  const onRegionChange = (value) => {
+    setRegion(value);
+    setCountry(value === "sa" ? "South Africa" : "");
+  };
 
   return (
     <div className="checkout">
@@ -48,8 +65,8 @@ export default function Checkout() {
 
             <dl className="checkout__totals">
               <div>
-                <dt>Price</dt>
-                <dd>{formatZAR(edition.priceZAR)}</dd>
+                <dt>Price {isIntl ? "(international)" : "(South Africa)"}</dt>
+                <dd>{formatZAR(unit)}</dd>
               </div>
               <div>
                 <dt>Quantity</dt>
@@ -59,18 +76,49 @@ export default function Checkout() {
                 <dt>Total</dt>
                 <dd>{formatZAR(total)}</dd>
               </div>
+              {isIntl && (
+                <div className="checkout__approx">
+                  <dt>Approx. in USD</dt>
+                  <dd>&#8776; {formatUSD(edition.priceUSD * qty)}</dd>
+                </div>
+              )}
             </dl>
 
-            <p className="checkout__fx">
-              You’ll be charged {formatZAR(total)} in South African Rand. International
-              cards are accepted and converted by your bank; the{" "}
-              {formatUSD(edition.priceUSD)} figure is an approximate guide only.
-            </p>
+            {isIntl ? (
+              <p className="checkout__fx">
+                PayFast processes in South African Rand, so you’ll be charged{" "}
+                <strong>{formatZAR(total)}</strong>. Your bank converts this to
+                approximately {formatUSD(edition.priceUSD * qty)} - the exact amount
+                depends on your bank’s exchange rate on the day.
+              </p>
+            ) : (
+              <p className="checkout__fx">
+                You’ll be charged <strong>{formatZAR(total)}</strong> in South African
+                Rand via PayFast’s secure checkout.
+              </p>
+            )}
           </aside>
 
           {/* ---- Buyer details -> PayFast ---- */}
           <form className="checkout__form" action="/pay/initiate.php" method="post">
             <input type="hidden" name="edition" value={edition.slug} />
+
+            <label className="field">
+              <span className="field__label">Delivery region</span>
+              <select
+                className="field__input"
+                name="region"
+                value={region}
+                onChange={(e) => onRegionChange(e.target.value)}
+              >
+                <option value="sa">South Africa</option>
+                <option value="intl">International (outside South Africa)</option>
+              </select>
+              <span className="field__hint">
+                International orders are priced differently (charged in Rand at the
+                international rate).
+              </span>
+            </label>
 
             <label className="field">
               <span className="field__label">Full name</span>
@@ -89,8 +137,23 @@ export default function Checkout() {
             </div>
 
             <label className="field">
-              <span className="field__label">Delivery address</span>
-              <input className="field__input" type="text" name="address_line1" placeholder="Street address" required autoComplete="address-line1" />
+              <span className="field__label">
+                {isIntl ? "Delivery address" : "Delivery address (nearest PostNet)"}
+              </span>
+              <input
+                className="field__input"
+                type="text"
+                name="address_line1"
+                placeholder={isIntl ? "Street address" : "Street address of your nearest PostNet"}
+                required
+                autoComplete="address-line1"
+              />
+              {!isIntl && (
+                <span className="field__hint">
+                  Orders within South Africa are delivered PostNet-to-PostNet - please
+                  enter the address of your nearest PostNet store as the delivery address.
+                </span>
+              )}
             </label>
             <label className="field">
               <span className="field__label field__label--hidden">Address line 2</span>
@@ -115,7 +178,15 @@ export default function Checkout() {
               </label>
               <label className="field">
                 <span className="field__label">Country</span>
-                <input className="field__input" type="text" name="country" defaultValue="South Africa" required autoComplete="country-name" />
+                <input
+                  className="field__input"
+                  type="text"
+                  name="country"
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                  required
+                  autoComplete="country-name"
+                />
               </label>
             </div>
 
@@ -150,6 +221,8 @@ export default function Checkout() {
             </p>
           </form>
         </div>
+
+        <EftOption edition={edition} qty={qty} />
       </div>
     </div>
   );
