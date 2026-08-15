@@ -6,6 +6,12 @@
   RewriteEngine On
   RewriteBase /
 
+  # Canonical domain: permanently redirect any matthewwillman.co.za host
+  # (apex, www, or legacy subdomains) to the equivalent .com URL. Host-scoped,
+  # so requests already on .com are never matched (no redirect loop).
+  RewriteCond %{HTTP_HOST} matthewwillman\.co\.za$ [NC]
+  RewriteRule ^ https://www.matthewwillman.com%{REQUEST_URI} [L,R=301]
+
   # If the requested file or directory exists, serve it directly.
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
