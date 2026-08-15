@@ -12,6 +12,11 @@
   RewriteCond %{HTTP_HOST} matthewwillman\.co\.za$ [NC]
   RewriteRule ^ https://www.matthewwillman.com%{REQUEST_URI} [L,R=301]
 
+  # Canonical host: send the bare apex matthewwillman.com to the www. version.
+  # Anchored to the exact apex, so www.matthewwillman.com never matches (no loop).
+  RewriteCond %{HTTP_HOST} ^matthewwillman\.com$ [NC]
+  RewriteRule ^ https://www.matthewwillman.com%{REQUEST_URI} [L,R=301]
+
   # If the requested file or directory exists, serve it directly.
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
