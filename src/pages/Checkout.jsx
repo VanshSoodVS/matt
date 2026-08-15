@@ -61,7 +61,7 @@ export default function Checkout() {
             <h2 className="checkout__ed-name">{edition.name}</h2>
             {edition.note && <p className="checkout__ed-note">{edition.note}</p>}
             {edition.limit && <p className="checkout__ed-note">{edition.limit}</p>}
-            <p className="checkout__ed-note">FedEx priority shipping included</p>
+            <p className="checkout__ed-note">FedEx priority shipping and packaging included</p>
 
             <dl className="checkout__totals">
               <div>
@@ -155,40 +155,52 @@ export default function Checkout() {
                 </span>
               )}
             </label>
-            <label className="field">
-              <span className="field__label field__label--hidden">Address line 2</span>
-              <input className="field__input" type="text" name="address_line2" placeholder="Apartment, suite, etc. (optional)" autoComplete="address-line2" />
-            </label>
+            {isIntl ? (
+              <>
+                <label className="field">
+                  <span className="field__label field__label--hidden">Address line 2</span>
+                  <input className="field__input" type="text" name="address_line2" placeholder="Apartment, suite, etc. (optional)" autoComplete="address-line2" />
+                </label>
 
-            <div className="field-row">
-              <label className="field">
-                <span className="field__label">City</span>
-                <input className="field__input" type="text" name="city" required autoComplete="address-level2" />
-              </label>
-              <label className="field">
-                <span className="field__label">Province / State</span>
-                <input className="field__input" type="text" name="province" autoComplete="address-level1" />
-              </label>
-            </div>
+                <div className="field-row">
+                  <label className="field">
+                    <span className="field__label">City</span>
+                    <input className="field__input" type="text" name="city" required autoComplete="address-level2" />
+                  </label>
+                  <label className="field">
+                    <span className="field__label">Province / State</span>
+                    <input className="field__input" type="text" name="province" autoComplete="address-level1" />
+                  </label>
+                </div>
 
-            <div className="field-row">
-              <label className="field">
-                <span className="field__label">Postal code</span>
-                <input className="field__input" type="text" name="postal_code" required autoComplete="postal-code" />
-              </label>
-              <label className="field">
-                <span className="field__label">Country</span>
-                <input
-                  className="field__input"
-                  type="text"
-                  name="country"
-                  value={country}
-                  onChange={(e) => setCountry(e.target.value)}
-                  required
-                  autoComplete="country-name"
-                />
-              </label>
-            </div>
+                <div className="field-row">
+                  <label className="field">
+                    <span className="field__label">Postal code</span>
+                    <input className="field__input" type="text" name="postal_code" required autoComplete="postal-code" />
+                  </label>
+                  <label className="field">
+                    <span className="field__label">Country</span>
+                    <input
+                      className="field__input"
+                      type="text"
+                      name="country"
+                      value={country}
+                      onChange={(e) => setCountry(e.target.value)}
+                      required
+                      autoComplete="country-name"
+                    />
+                  </label>
+                </div>
+              </>
+            ) : (
+              <>
+                <label className="field">
+                  <span className="field__label">Province</span>
+                  <input className="field__input" type="text" name="province" autoComplete="address-level1" />
+                </label>
+                <input type="hidden" name="country" value="South Africa" />
+              </>
+            )}
 
             <label className="field">
               <span className="field__label">Quantity</span>

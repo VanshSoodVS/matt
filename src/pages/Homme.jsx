@@ -119,7 +119,7 @@ export default function Homme() {
             <p className="homme-edition__price">International {formatUSD(ED_SLIPCASE.priceUSD)}</p>
             <p className="homme-edition__price">FedEx priority included</p>
             <Link className="homme-edition__cta" to={`/checkout?edition=${ED_SLIPCASE.slug}`}>
-              PRE-ORDER NOW
+              ORDER HERE
             </Link>
           </div>
 
@@ -133,7 +133,7 @@ export default function Homme() {
             <p className="homme-edition__price">International {formatUSD(ED_FIRST.priceUSD)}</p>
             <p className="homme-edition__price">FedEx priority included</p>
             <Link className="homme-edition__cta" to={`/checkout?edition=${ED_FIRST.slug}`}>
-              PRE-ORDER NOW
+              ORDER HERE
             </Link>
           </div>
         </div>

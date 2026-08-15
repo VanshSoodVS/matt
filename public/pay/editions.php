@@ -13,11 +13,11 @@ return [
     'collectors-slipcase' => [
         'name'        => "HOMME - Collector's Slipcase Edition",
         'amount'      => '3450.00', // ZAR, 2 decimals (PayFast format)
-        'amount_intl' => '5760.00',
+        'amount_intl' => '5200.00', // ≈ US$320
     ],
     'signed-first' => [
         'name'        => 'HOMME - Signed First Edition',
         'amount'      => '2850.00',
-        'amount_intl' => '5040.00',
+        'amount_intl' => '4600.00', // ≈ US$280
     ],
 ];

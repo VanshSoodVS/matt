@@ -42,7 +42,7 @@ export default function HomePortal() {
               <p className="edition__price">FedEx Priority Included</p>
             </div>
             <Link className="edition__submit" to={`/checkout?edition=${ED_SLIPCASE.slug}`}>
-              PRE-ORDER NOW
+              ORDER HERE
             </Link>
           </div>
 
@@ -60,7 +60,7 @@ export default function HomePortal() {
               <p className="edition__price">FedEx Priority Included</p>
             </div>
             <Link className="edition__submit" to={`/checkout?edition=${ED_FIRST.slug}`}>
-              PRE-ORDER NOW
+              ORDER HERE
             </Link>
           </div>
         </div>

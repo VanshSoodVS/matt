@@ -10,8 +10,9 @@
 //   priceIntlZAR  = charged to international buyers (the ZAR value of the intl price)
 //   priceUSD      = the indicative US$ figure shown to international buyers
 //
-// >>> priceIntlZAR is set to priceUSD × ~R18/US$. Adjust to the exact ZAR you
-//     want to receive from an international sale (rates move; you keep the ZAR).
+// >>> priceIntlZAR is the exact ZAR you want to receive from an international
+//     sale (currently R5 200 ≈ US$320, R4 600 ≈ US$280). Rates move; you keep
+//     the ZAR. Mirror any change in public/pay/editions.php (amount_intl).
 
 const BOX = "/wp-content/uploads/landing-images";
 
@@ -23,7 +24,7 @@ export const EDITIONS = [
     note: "Including original giclee signed print & certificate",
     limit: "Limited to 150 only",
     priceZAR: 3450,
-    priceIntlZAR: 5760,
+    priceIntlZAR: 5200,
     priceUSD: 320,
     image: `${BOX}/homme-box-1.jpg`,
   },
@@ -34,7 +35,7 @@ export const EDITIONS = [
     note: "",
     limit: "Limited to 600 only",
     priceZAR: 2850,
-    priceIntlZAR: 5040,
+    priceIntlZAR: 4600,
     priceUSD: 280,
     image: `${BOX}/homme-box-2.jpg`,
   },

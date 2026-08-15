@@ -99,6 +99,21 @@ $order['pf_data'] = $data;
 pf_save_order($orderId, $order);
 
 $s = $order['shipping'];
+$deliveryType = (isset($order['region']) && $order['region'] === 'intl')
+    ? 'International'
+    : 'South Africa (PostNet-to-PostNet)';
+
+// Assemble the city / province / postal line from whatever is present — South
+// African orders only capture the PostNet address + province.
+$cityParts = array_filter([
+    isset($s['city']) ? $s['city'] : '',
+    isset($s['province']) ? $s['province'] : '',
+], 'strlen');
+$cityLine = implode(', ', $cityParts);
+if (!empty($s['postal'])) {
+    $cityLine = trim($cityLine . ' ' . $s['postal']);
+}
+
 $body =
     "A HOMME pre-order has been PAID.\n\n" .
     "Order reference: {$orderId}\n" .
@@ -106,15 +121,16 @@ $body =
     "Paid at: {$order['paid_at']}\n\n" .
     "Edition: {$order['edition_name']}\n" .
     "Quantity: {$order['quantity']}\n" .
-    "Amount: R{$order['amount']}\n\n" .
+    "Amount: R{$order['amount']}\n" .
+    "Delivery: {$deliveryType}\n\n" .
     "Buyer\n" .
     "  Name:  {$order['buyer']['name']}\n" .
     "  Email: {$order['buyer']['email']}\n" .
     "  Phone: {$order['buyer']['phone']}\n\n" .
     "Ship to\n" .
     "  {$s['line1']}\n" .
-    ($s['line2'] !== '' ? "  {$s['line2']}\n" : '') .
-    "  {$s['city']}, {$s['province']} {$s['postal']}\n" .
+    (!empty($s['line2']) ? "  {$s['line2']}\n" : '') .
+    ($cityLine !== '' ? "  {$cityLine}\n" : '') .
     "  {$s['country']}\n";
 
 $fromDomain = parse_url($cfg['site_url'], PHP_URL_HOST) ?: 'matthewwillman.com';
